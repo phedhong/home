@@ -2,15 +2,38 @@
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
 
-import { GET } from './api/hello.ts'
+import { addResource, listResources, IResource } from "../data/resources.ts";
 
-let response = await GET(Astro)
-const data = await response.json()
+if (Astro.request.method === "POST") {
+	try {
+		const data =await Astro.request.formData();
+		const resource: IResource = {
+			url: data.get("url")?.toString() || "",
+      title: data.get("title")?.toString() || "",
+      summary: data.get("summary")?.toString() || "",
+		};
+		await addResource(resource);
+	} catch (error) {
+		console.error(error)
+	}
+
+	return Astro.redirect('/');
+}
+
+const resources: IResource[] = await listResources();
 
 ---
 
 <Layout title="Welcome to Astro.">
-	<h1>{data.greeting} world!</h1>
+	<ul role="list" class="link-card-grid">
+		{resources.map((resource) => (
+			<Card
+				href={resource.url}
+				title={resource.title}
+				body={resource.summary}
+			/>
+		))}
+	</ul>
 </Layout>
 
 <style>

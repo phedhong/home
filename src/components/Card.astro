@@ -19,6 +19,33 @@ const { href, title, body } = Astro.props;
 		</p>
 	</a>
 </li>
+
+
+<script>
+	document.querySelectorAll('span.delete').forEach((span) => {
+		span.addEventListener('click', async (e) => {
+			e.preventDefault();
+			e.stopPropagation();
+	
+			const title = (span as HTMLElement).dataset.title || '';
+			const encTitle = encodeURIComponent(title);
+			const url = `/api/resources.json?title=${encTitle}`;
+	
+			try {
+				const res = await fetch(url, { method: 'DELETE' });
+			if (res.ok) {
+				span.parentElement?.remove();
+			}
+			} catch (err) {
+				console.log(err);
+			}
+		});
+	});
+	</script>
+	
+
+
+
 <style>
 	.link-card {
 		list-style: none;
