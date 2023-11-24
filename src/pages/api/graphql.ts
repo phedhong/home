@@ -1,4 +1,4 @@
-// import type { APIRoute } from 'astro';
+import type { APIRoute } from 'astro';
 // import { createYoga, createSchema } from 'graphql-yoga';
 // import { getDataEntryById } from 'astro:content';
 
@@ -37,3 +37,33 @@
 //   const { request } = context;
 //   return handleRequest(request, context);
 // };
+
+
+
+export const GET: APIRoute = () => {
+  return new Response(JSON.stringify({
+      message: "This was a GET!"
+    })
+  )
+}
+
+export const POST: APIRoute = () => {
+  return new Response(JSON.stringify({
+      message: "This was a POST!"
+    })
+  )
+}
+
+export const DELETE: APIRoute = () => {
+  return new Response(JSON.stringify({
+      message: "This was a DELETE!"
+    })
+  )
+}
+
+export const ALL: APIRoute = () => {
+  return new Response(JSON.stringify({
+      message: `This was a All`
+    })
+  )
+}

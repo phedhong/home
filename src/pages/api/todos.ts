@@ -1,4 +1,4 @@
-import { APIRoute } from "astro";
+import { APIContext, APIRoute } from "astro";
 
 // export const del :APIRoute = async ({request}) => {
 //   const title = new URL(request.url).searchParams.get("title");
@@ -9,11 +9,17 @@ import { APIRoute } from "astro";
 
 // }
 
-export const GET: APIRoute = () => {
-  return new Response(JSON.stringify({
-      message: "This was a GET!"
-    })
-  )
+export const GET: APIRoute = (params: APIContext) => {
+
+  console.log(params)
+
+
+  return new Response(JSON.stringify({params}))
+
+  // return new Response(JSON.stringify({
+  //     message: "This was a GET!"
+  //   })
+  // )
 }
 
 export const POST: APIRoute = () => {

@@ -1,35 +1,40 @@
 ---
 
+export const prerender = true;
 import Layout from "@layouts/default/Layout.astro";
 import { categories } from "@scripts/config";
-// import { getTodos } from "@scripts/api";
+import { GET, ALL } from '../api/todos.ts';
+import { getDataEntryById, getEntries, getEntryBySlug,getEntry } from 'astro:content';
 
-import { GET, ALL } from '../api/category.ts';
 
 
-export async function getStaticPaths()  {
-  
-  return categories.flatMap((category) => {
+// const ShoppingCart = await getDataEntryById('example', 'cart');
 
-    return {
-      params: {category},
-    }
-  });
-  
-}
 
-  let response = await ALL(Astro)
-// let response = await getTodos(Astro.request)
-  const data = await response.json();
-// const response = await fetch(`/api/${Astro.params.category as string}`);
-// const data = await response.json();
+  export async function getStaticPaths()  {
+    
+    return categories.flatMap((category) => {
 
-const  { category } = Astro.params
+
+      return {
+        params: {category}      }
+    });
+    
+  }
+
+  // const response = await GET(Astro)
+  // const data = await response.json();
+
+  const  { category } = Astro.params
+  // const {filteredCategories} = Astro.props
+
 
 ---
 
 <Layout>
+
+
   { category }
 
-  {data.message}
+
 </Layout>

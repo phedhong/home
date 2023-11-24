@@ -1,8 +1,11 @@
-import { APIRoute } from "astro";
+import { APIContext, APIRoute } from "astro";
 
-export const GET: APIRoute = () => {
+export const GET: APIRoute = ({params} : APIContext) => {
+
+  const id = Number(params.id)
+
   return new Response(JSON.stringify({
-      message: "This was a GET!"
+      message: `${id}`
     })
   )
 }
