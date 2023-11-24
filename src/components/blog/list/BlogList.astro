@@ -1,0 +1,19 @@
+---
+
+import BlogLink from './BlogLink.astro'
+
+import { getCollection, CollectionEntry } from 'astro:content';
+
+
+interface Props {
+  data: CollectionEntry<'blog'>
+}
+
+const { data } = Astro.props
+
+---
+
+
+<div >
+  { data.map((blog) => ( <BlogLink {...blog.data} />  ))}
+</div>

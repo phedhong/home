@@ -1,0 +1,60 @@
+---
+
+import ThemeToggler from "./ThemeToggler.astro";
+
+import { categories } from "@scripts/config";
+
+
+const items = [
+    { name: "Blog", href: "/blog" },
+    { name: "Docoment", href: "/docs" },
+    { name: "Projects", href: "/projects" },
+
+  ];
+
+---
+
+<nav class="flex flex-col md:flex-row w-full gap-8">
+
+  <div class="flex-1">
+    <div class="flex items-center gap-1">
+      <div class="font-bold text-2xl">
+        <a href="/" class="contrast"><strong>Home</strong></a>
+      </div>
+    </div>
+  </div>
+
+
+  {
+    categories.map((item) => 
+      <div ><a href={`/${item}`} class="caplitalize"> {item} </a> </div>
+      // <div > <a href={item.href} > {item.name} </a> </div>
+    )
+  }
+
+  <!-- <div>
+    <ThemeToggler ></ThemeToggler>
+  </div> -->
+
+</nav>
+
+
+<style>
+
+#navbar {
+
+width: 100%;
+display: block;
+transition: top 1s;
+}
+
+#navbar a {
+float: left;
+display: block;
+text-align: center;
+padding: 15px;
+text-decoration: none;
+font-size: 17px;
+}
+
+</style>

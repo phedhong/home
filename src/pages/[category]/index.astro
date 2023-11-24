@@ -1,0 +1,35 @@
+---
+
+import Layout from "@layouts/default/Layout.astro";
+import { categories } from "@scripts/config";
+// import { getTodos } from "@scripts/api";
+
+import { GET, ALL } from '../api/category.ts';
+
+
+export async function getStaticPaths()  {
+  
+  return categories.flatMap((category) => {
+
+    return {
+      params: {category},
+    }
+  });
+  
+}
+
+  let response = await ALL(Astro)
+// let response = await getTodos(Astro.request)
+  const data = await response.json();
+// const response = await fetch(`/api/${Astro.params.category as string}`);
+// const data = await response.json();
+
+const  { category } = Astro.params
+
+---
+
+<Layout>
+  { category }
+
+  {data.message}
+</Layout>
