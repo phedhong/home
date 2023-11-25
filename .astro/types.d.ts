@@ -1,5 +1,17 @@
 declare module 'astro:content' {
 	interface Render {
+<<<<<<< HEAD
+=======
+		'.mdoc': Promise<{
+			Content(props: Record<string, any>): import('astro').MarkdownInstance<{}>['Content'];
+			headings: import('astro').MarkdownHeading[];
+		}>;
+	}
+}
+
+declare module 'astro:content' {
+	interface Render {
+>>>>>>> blog-layout
 		'.mdx': Promise<{
 			Content: import('astro').MarkdownInstance<{}>['Content'];
 			headings: import('astro').MarkdownHeading[];
@@ -184,25 +196,77 @@ declare module 'astro:content' {
 	>;
 
 	type ContentEntryMap = {
+<<<<<<< HEAD
 		"blogs": {
+=======
+		"blog": {
+>>>>>>> blog-layout
 "first-post.md": {
 	id: "first-post.md";
   slug: "first-post";
   body: string;
+<<<<<<< HEAD
   collection: "blogs";
+=======
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"markdown-style-guide.md": {
+	id: "markdown-style-guide.md";
+  slug: "markdown-style-guide";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"third-post.md": {
+	id: "third-post.md";
+  slug: "third-post";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+};
+"docs": {
+"intro.mdoc": {
+	id: "intro.mdoc";
+  slug: "intro";
+  body: string;
+  collection: "docs";
+  data: any
+} & { render(): Render[".mdoc"] };
+};
+"posts": {
+"first-post.md": {
+	id: "first-post.md";
+  slug: "first-post";
+  body: string;
+  collection: "posts";
+>>>>>>> blog-layout
   data: any
 } & { render(): Render[".md"] };
 "markdown-style-guide.md": {
 	id: "markdown-style-guide.md";
   slug: "markdown-style-guide";
   body: string;
+<<<<<<< HEAD
   collection: "blogs";
+=======
+  collection: "posts";
+  data: any
+} & { render(): Render[".md"] };
+"second-post.md": {
+	id: "second-post.md";
+  slug: "second-post";
+  body: string;
+  collection: "posts";
+>>>>>>> blog-layout
   data: any
 } & { render(): Render[".md"] };
 "third-post.md": {
 	id: "third-post.md";
   slug: "third-post";
   body: string;
+<<<<<<< HEAD
   collection: "blogs";
   data: any
 } & { render(): Render[".md"] };
@@ -226,6 +290,8 @@ declare module 'astro:content' {
 	id: "first-post.md";
   slug: "first-post";
   body: string;
+=======
+>>>>>>> blog-layout
   collection: "posts";
   data: any
 } & { render(): Render[".md"] };
@@ -234,7 +300,33 @@ declare module 'astro:content' {
 	};
 
 	type DataEntryMap = {
+<<<<<<< HEAD
 		
+=======
+		"example": {
+"blog": {
+	id: "blog";
+  collection: "example";
+  data: any
+};
+"default_resources": {
+	id: "default_resources";
+  collection: "example";
+  data: any
+};
+"docs": {
+	id: "docs";
+  collection: "example";
+  data: any
+};
+"movie": {
+	id: "movie";
+  collection: "example";
+  data: any
+};
+};
+
+>>>>>>> blog-layout
 	};
 
 	type AnyEntryMap = ContentEntryMap & DataEntryMap;

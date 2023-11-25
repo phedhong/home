@@ -8,8 +8,14 @@ const data = await response.json()
 
 ---
 
-<Layout>
-
-	{data.body}
-
+<Layout title="Welcome to Astro.">
+	<ul role="list" class="link-card-grid">
+		{resources.map((resource) => (
+			<Card
+				href={resource.url}
+				title={resource.title}
+				body={resource.summary}
+			/>
+		))}
+	</ul>
 </Layout>

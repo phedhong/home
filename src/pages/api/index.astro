@@ -1,0 +1,28 @@
+---
+export const prerender = true;
+
+import Layout from "@layouts/default/Layout.astro";
+import { categories } from "@scripts/config";
+import { getCollection, getDataEntryById, getEntries, getEntryBySlug,getEntry } from 'astro:content';
+
+  export async function getStaticPaths()  {
+    
+    return categories.flatMap((category) => {
+
+      return {
+        params: {category}      }
+    });
+    
+  }
+
+  const  { category } = Astro.params
+  // const filteredData = await getEntries("data")
+
+---
+
+<Layout>
+
+
+  { category }
+
+</Layout>

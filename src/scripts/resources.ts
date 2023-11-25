@@ -1,4 +1,6 @@
-import defaultResources from "./default_resources.ts";
+// import { getDataEntryById } from 'astro:content';
+
+// const defaultResources = getDataEntryById("examples", "default_resources")
 
 export interface IResource {
   url: string;
@@ -37,6 +39,6 @@ export function deleteResource(title: string) {
 }
 
 // Bootstrap the database with the default resources
-defaultResources.forEach((resource) => {
-  addResource(resource);
-});
+// defaultResources.forEach((resource) => {
+//   addResource(resource);
+// });

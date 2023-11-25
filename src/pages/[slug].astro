@@ -1,0 +1,57 @@
+---
+import Layout from '@layouts/default/Layout.astro';
+import type { CollectionEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+	const posts = await getCollection('posts');
+	return posts.map(
+		({ data: {  placeholder, postTitle, seoMetaDescription }, render, slug, }) => {
+			return {
+				params: { slug },
+				props: {
+					placeholder,
+					seoMetaDescription,
+					render,
+					postTitle,
+				},
+			};
+		},
+	);
+}
+
+type PostCollection = CollectionEntry<'posts'>;
+
+type Props = Pick<
+	PostCollection['data'],
+	'featuredImage' | 'featuredImageAlt' | 'seoMetaDescription' | 'placeholder' | 'postTitle'
+> &
+	Pick<PostCollection, 'render'>;
+
+const { slug } = Astro.params;
+const {
+	seoMetaDescription: metadescription,
+	render,
+	postTitle: title,
+}: Props = Astro.props;
+
+const { Content } = await render();
+
+const seoProps = {
+	metadescription,
+	slug,
+	title,
+};
+
+
+---
+
+<Layout {...seoProps}>
+	<h1>{title}</h1>
+
+
+	<div class="container">
+		<Content />
+	</div>
+</Layout>
+

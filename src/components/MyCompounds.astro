@@ -1,0 +1,30 @@
+---
+
+import Blogs from "./blog/Blogs.astro";
+import BlogCard from "./blog/BlogCard.astro";
+import type { Code } from "astro:components";
+
+const {
+  items = Blogs,
+  class: className, 
+  ...rest
+} = Astro.props
+
+---
+
+
+<div class={className} {...rest}>
+
+  {
+    items.map((item) => ( <BlogCard {...item.data} />  ))
+  }  
+  <slot/>
+</div>
+
+
+
+<style>
+  .red {
+    color: red;
+  }
+</style>
