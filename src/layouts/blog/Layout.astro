@@ -1,0 +1,22 @@
+---
+
+---
+
+<html lang="en">
+  
+  <head></head>
+  <body>
+    <div class="min-h-[5vh]"><slot name="header" /></div>
+    <div class="flex min-h-[80vh] flex-col md:flex-row">
+      <section class="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+        <p class="absolute p-2 text-5xl text-white/10">Blog</p>
+
+        <slot name="page-title" />
+        <slot />
+        <slot name="page-footer" />
+      </section>
+    </div>
+    <div class="min-h-[5vh]"><slot name="footer" /></div>
+  </body>
+</html>
+
