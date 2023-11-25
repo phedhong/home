@@ -1,0 +1,19 @@
+---
+
+
+import Header from "@layouts/_elements/Header.astro";
+import Breadcrumbs from "@layouts/_elements/Breadcrumbs.astro";
+import Slot from "./Slot.astro";
+
+---
+
+<Slot>
+  <head>
+    <slot name="head" />
+  </head>
+  <Header slot="header" />
+  <Breadcrumbs />
+  <slot />
+  <slot name="footer" slot="footer" />
+</Slot>
+

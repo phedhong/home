@@ -1,0 +1,51 @@
+---
+import '@scripts/styles/tailwind.css';
+import { ViewTransitions } from "astro:transitions";
+
+
+export type Props = {
+  title: string;
+  description: string;
+  permalink: string;
+  image: string;
+};
+
+const { title, description, permalink, image } = Astro.props;
+---
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>{title}</title>
+<meta name="title" content={title} />
+{description && <meta name="description" content={description} />}
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="msapplication-TileColor" content="#da532c" />
+<meta name="msapplication-config" content="/browserconfig.xml" />
+<meta name="theme-color" content="#ffffff" />
+
+<!-- Open Graph Tags (Facebook) -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content={title} />
+{permalink && <meta property="og:url" content={permalink} />}
+{description && <meta property="og:description" content={description} />}
+{image && <meta property="og:image" content={image} />}
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:title" content={title} />
+{permalink && <meta property="twitter:url" content={permalink} />}
+{description && <meta property="twitter:description" content={description} />}
+{image && <meta property="twitter:image" content={image} />}
+
+<!-- Google Font -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap"
+  rel="stylesheet"
+/>
+
+<ViewTransitions />
+

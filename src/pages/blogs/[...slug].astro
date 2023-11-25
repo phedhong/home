@@ -1,0 +1,34 @@
+---
+
+import { type CollectionEntry, getCollection } from 'astro:content';
+import Layout from "@layouts/default/Layout.astro";
+import Seo from '@layouts/_elements/Seo.astro';
+
+
+export async function getStaticPaths() {
+	const posts = await getCollection('blogs');
+	return posts.map((post) => ({
+		params: { slug: post.slug },
+		props: {post},
+	}));
+}
+
+
+const { slug } = Astro.params
+const { post } = Astro.props;
+const { Content } = await post.render();
+
+const seoProps = {
+	slug: slug,
+	description : 'description', 
+	pageTitle : 'pageTitle', 
+};
+
+
+---
+
+<Layout >
+	<Seo slot="head" {...seoProps} />
+
+	<Content />
+</Layout>
