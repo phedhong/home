@@ -2,6 +2,8 @@
 
 import { Debug } from "astro:components";
 
+const {item = Astro } = Astro.props
+
 ---
 
-<Debug {Astro} />
+<Debug {item} />

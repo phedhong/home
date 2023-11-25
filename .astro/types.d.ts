@@ -1,5 +1,14 @@
 declare module 'astro:content' {
 	interface Render {
+		'.mdoc': Promise<{
+			Content(props: Record<string, any>): import('astro').MarkdownInstance<{}>['Content'];
+			headings: import('astro').MarkdownHeading[];
+		}>;
+	}
+}
+
+declare module 'astro:content' {
+	interface Render {
 		'.mdx': Promise<{
 			Content: import('astro').MarkdownInstance<{}>['Content'];
 			headings: import('astro').MarkdownHeading[];
@@ -199,19 +208,51 @@ declare module 'astro:content' {
   collection: "blog";
   data: InferEntrySchema<"blog">
 } & { render(): Render[".md"] };
-"second-post.md": {
-	id: "second-post.md";
-  slug: "second-post";
-  body: string;
-  collection: "blog";
-  data: InferEntrySchema<"blog">
-} & { render(): Render[".md"] };
 "third-post.md": {
 	id: "third-post.md";
   slug: "third-post";
   body: string;
   collection: "blog";
   data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+};
+"docs": {
+"intro.mdoc": {
+	id: "intro.mdoc";
+  slug: "intro";
+  body: string;
+  collection: "docs";
+  data: any
+} & { render(): Render[".mdoc"] };
+};
+"posts": {
+"first-post.md": {
+	id: "first-post.md";
+  slug: "first-post";
+  body: string;
+  collection: "posts";
+  data: any
+} & { render(): Render[".md"] };
+"markdown-style-guide.md": {
+	id: "markdown-style-guide.md";
+  slug: "markdown-style-guide";
+  body: string;
+  collection: "posts";
+  data: any
+} & { render(): Render[".md"] };
+"second-post.md": {
+	id: "second-post.md";
+  slug: "second-post";
+  body: string;
+  collection: "posts";
+  data: any
+} & { render(): Render[".md"] };
+"third-post.md": {
+	id: "third-post.md";
+  slug: "third-post";
+  body: string;
+  collection: "posts";
+  data: any
 } & { render(): Render[".md"] };
 };
 

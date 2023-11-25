@@ -1,3 +1,10 @@
+import { ApolloClient, InMemoryCache } from '@apollo/client/core';
+
+export const client = new ApolloClient({
+  uri: 'http://localhost:4321/api/graphql',
+  cache: new InMemoryCache(),
+});
+
 export interface Product {
 	id: number;
 	name: string;
@@ -79,4 +86,29 @@ export async function addToUserCart(id: number | string, name: string): Promise<
 			name,
 		}),
 	});
+}
+
+const story = (path: string) => `https://node-hnapi.herokuapp.com/${path}`;
+const user = (path: string) => `https://hacker-news.firebaseio.com/v0/${path}.json`;
+
+export async function fetchAPI(path: string) {
+	const url = path.startsWith('user') ? user(path) : story(path);
+	const headers = { 'User-Agent': 'chrome' };
+
+	try {
+		let response = await fetch(url, { headers });
+		let text = await response.text();
+		try {
+			if (text === null) {
+				return { error: 'Not found' };
+			}
+			return JSON.parse(text);
+		} catch (e) {
+			console.error(`Recevied from API: ${text}`);
+			console.error(e);
+			return { error: e };
+		}
+	} catch (error) {
+		return { error };
+	}
 }

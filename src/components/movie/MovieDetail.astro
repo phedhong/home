@@ -1,26 +1,26 @@
 ---
-const { data } = Astro.props;
+const { items } = Astro.props;
 
 const movie = {
-	...data,
-	poster_path: data.poster_path
-		? 'https://image.tmdb.org/t/p/w500/' + data.poster_path
+	...items,
+	poster_path: items.poster_path
+		? 'https://image.tmdb.org/t/p/w500/' + items.poster_path
 		: 'https://via.placeholder.com/500x750',
-	vote_average: (data.vote_average * 10).toFixed(2) + '%',
-	release_date: new Date(data.release_date).toLocaleDateString('en-us', {
+	vote_average: (items.vote_average * 10).toFixed(2) + '%',
+	release_date: new Date(items.release_date).toLocaleDateString('en-us', {
 		year: 'numeric',
 		month: 'long',
 		day: 'numeric',
 	}),
-	genres: data.genres.map((g: any) => g.name).join(', '),
-	crew: data.credits.crew.slice(0, 3),
-	cast: data.credits.cast.slice(0, 5).map((c: any) => ({
+	genres: items.genres.map((g: any) => g.name).join(', '),
+	crew: items.credits.crew.slice(0, 3),
+	cast: items.credits.cast.slice(0, 5).map((c: any) => ({
 		...c,
 		profile_path: c.profile_path
 			? 'https://image.tmdb.org/t/p/w300/' + c.profile_path
 			: 'https://via.placeholder.com/300x450',
 	})),
-	images: data.images.backdrops.slice(0, 9),
+	images: items.images.backdrops.slice(0, 9),
 };
 ---
 
@@ -39,10 +39,10 @@ const movie = {
 			<h2 class="text-4xl mt-4 md:mt-0 mb-2 font-semibold">{movie.title}</h2>
 			<div class="flex flex-wrap items-center text-gray-400 text-sm">
 				<svg class="fill-current text-orange-500 w-4" viewBox="0 0 24 24"
-					><g data-name="Layer 2"
+					><g items-name="Layer 2"
 						><path
 							d="M17.56 21a1 1 0 01-.46-.11L12 18.22l-5.1 2.67a1 1 0 01-1.45-1.06l1-5.63-4.12-4a1 1 0 01-.25-1 1 1 0 01.81-.68l5.7-.83 2.51-5.13a1 1 0 011.8 0l2.54 5.12 5.7.83a1 1 0 01.81.68 1 1 0 01-.25 1l-4.12 4 1 5.63a1 1 0 01-.4 1 1 1 0 01-.62.18z"
-							data-name="star"></path></g
+							items-name="star"></path></g
 					></svg
 				>
 				<span class="ml-1">{movie.vote_average}</span>

@@ -1,28 +1,24 @@
 import { defineCollection, z } from 'astro:content';
+import { rssSchema } from '@astrojs/rss';
 
-const blog = defineCollection({
-	// Type-check frontmatter using a schema
+const postCollection = defineCollection({
+	type: 'content',
 	schema: z.object({
 		title: z.string(),
-		description: z.string(),
-		// Transform string to Date object
-		pubDate: z.coerce.date(),
-		updatedDate: z.coerce.date().optional(),
-		heroImage: z.string().optional(),
+    description: z.string().optional(),
+		pubDate: z.coerce.date().optional(),
+		image: z.string().optional(),
+		tags: z.array(z.string()).default(["tag"]),
 	}),
 });
 
 
-const movies = defineCollection({
-	type: 'data',
-	schema: z.object({
-		data: z.any(),
-	}),
+
+const blogCollection = defineCollection({
+	schema: rssSchema,
 });
-
-
 
 export const collections = { 
-  blog,
-  data: movies,
+  blogs: blogCollection,
+	posts: postCollection,
 };
